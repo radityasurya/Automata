@@ -8,13 +8,13 @@ namespace Automata
 {
     public class Transition
     {
-        public string StartState { get; set; }
+        public char CurrentState { get; set; }
         public char Token { get; set; }
-        public string EndState { get; set; }
+        public char NextState { get; set; }
 
-        public Transition(string startState, char token, string endState)
+        public Transition(char currentState, char token, char nextState)
         {
-            this.StartState = startState;
+            this.CurrentState = currentState;
 
             if(token == '_')
             {
@@ -23,12 +23,12 @@ namespace Automata
             {
                 this.Token = token;
             }
-            this.EndState = endState;    
+            this.NextState = nextState;    
         }
 
         public override string ToString()
         {
-            return string.Format("\"{0}\" -> " + "\"{1}\" [label=" + "\"{2}\"]", StartState, EndState, Token);
+            return string.Format("\"{0}\" -> " + "\"{1}\" [label=" + "\"{2}\"]", CurrentState, NextState, Token);
         }
     }
 }

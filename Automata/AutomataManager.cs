@@ -13,10 +13,11 @@ namespace Automata
     public class AutomataManager
     {
         private FileHelper fh;
+        private DFA dfa;
 
         // Variables
         private List<string> loadedFileList = new List<string>();
-        private List<char> alphabets = new List<char>();
+        private Alphabet alphabet;
         private List<State> states = new List<State>();
         private List<Transition> transitions = new List<Transition>();
 
@@ -46,12 +47,14 @@ namespace Automata
             result = result.Split(':').Last();
             result = result.Trim();
             
-            alphabets.Clear();
+            List<char> alphabets = new List<char>();
 
             foreach (var c in result)
             {
                 alphabets.Add(Convert.ToChar(c));
             }
+
+            alphabet = new Alphabet(alphabets.ToArray());
 
         }
 
@@ -65,7 +68,7 @@ namespace Automata
 
             foreach (var s in _state)
             {
-                states.Add(new State(s));
+                states.Add(new State(Convert.ToChar(s)));
             }
         }
 
@@ -90,7 +93,7 @@ namespace Automata
 
                 foreach (var s in states)
                 {
-                    if (s.Name.Equals(_s))
+                    if (s.Name.Equals(Convert.ToChar(_s)))
                     {
                         s.isFinal = true;
                     }
@@ -123,9 +126,9 @@ namespace Automata
                 string[] separators = { ",", "-->" };
                 string[] result = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-                var startState = result[0];
+                var startState = Convert.ToChar(result[0]);
                 var token = Convert.ToChar(result[1].Trim());
-                var endState = result[2].Trim();
+                var endState = Convert.ToChar(result[2].Trim());
 
                 transitions.Add(new Transition(startState, token, endState));
             }
@@ -147,11 +150,15 @@ namespace Automata
                 result = result.Split(':').Last();
                 result = result.Trim();
 
-                if (result != "y")
-                {
-                    return false;
-                }
-                return true;
+                //if (result != "y")
+                //{
+                //    return false;
+                //}
+                //return true;
+                dfa = new DFA(alphabet.Characters, transitions, states);
+
+                return dfa.isDFA();
+                
             }
 
         }
@@ -200,6 +207,8 @@ namespace Automata
             lines.Add("digraph myAutomaton {");
             lines.Add("   rankdir=LR;");
 
+            lines.Add(string.Format("\"\" [shape=none]"));
+
             // draw states
             foreach (var s in states)
             {
@@ -211,6 +220,8 @@ namespace Automata
 
                 lines.Add(string.Format("\"{0}\" [shape={1}]", s.Name, circle));
             }
+
+            lines.Add(string.Format("\"\" -> " + "\"{0}\"", transitions[0].CurrentState));
 
             // draw transitions
             foreach (var t in transitions)

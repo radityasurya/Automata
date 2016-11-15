@@ -8,10 +8,10 @@ namespace Automata
 {
     public class State
     {
-        public string Name { get; private set; }
+        public char Name { get; private set; }
         public bool isFinal { get; set; }
 
-        public State(string name)
+        public State(char name)
         {
             this.Name = name;
             this.isFinal = false;

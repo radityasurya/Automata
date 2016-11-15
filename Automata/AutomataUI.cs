@@ -65,14 +65,14 @@ namespace Automata
 
             }
 
-            if (am.isFinite())
-            {
-                lbFinite.BackColor = Color.LightGreen;
-            } else
-            {
-                lbFinite.BackColor = Color.Red;
+            //if (am.isFinite())
+            //{
+            //    lbFinite.BackColor = Color.LightGreen;
+            //} else
+            //{
+            //    lbFinite.BackColor = Color.Red;
 
-            }
+            //}
 
             if (am.isWords())
             {

@@ -38,6 +38,9 @@
             this.lbFinite = new System.Windows.Forms.Label();
             this.lbWords = new System.Windows.Forms.Label();
             this.lbDFA = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbCheck = new System.Windows.Forms.TextBox();
+            this.btnCheck = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbDiagram)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,11 +135,41 @@
             this.lbDFA.Text = "DFA";
             this.lbDFA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(375, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Check String";
+            // 
+            // tbCheck
+            // 
+            this.tbCheck.Location = new System.Drawing.Point(378, 33);
+            this.tbCheck.Name = "tbCheck";
+            this.tbCheck.Size = new System.Drawing.Size(208, 20);
+            this.tbCheck.TabIndex = 9;
+            this.tbCheck.Tag = "";
+            this.tbCheck.Text = "aaaa";
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(592, 30);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(74, 25);
+            this.btnCheck.TabIndex = 11;
+            this.btnCheck.Text = "check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            // 
             // AutomataUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 445);
+            this.Controls.Add(this.btnCheck);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tbCheck);
             this.Controls.Add(this.lbDFA);
             this.Controls.Add(this.lbWords);
             this.Controls.Add(this.lbFinite);
@@ -166,6 +199,9 @@
         private System.Windows.Forms.Label lbFinite;
         private System.Windows.Forms.Label lbWords;
         private System.Windows.Forms.Label lbDFA;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbCheck;
+        private System.Windows.Forms.Button btnCheck;
     }
 }
 
