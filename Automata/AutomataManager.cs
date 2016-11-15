@@ -43,6 +43,16 @@ namespace Automata
         public void getAlphabets()
         {
             string result = loadedFileList.Find(item => item.Contains("alphabet"));
+            result = result.Split(':').Last();
+            result = result.Trim();
+            
+            alphabets.Clear();
+
+            foreach (var c in result)
+            {
+                alphabets.Add(Convert.ToChar(c));
+            }
+
         }
 
         public void getStates()
@@ -93,6 +103,8 @@ namespace Automata
             var startIndex = loadedFileList.FindIndex(item => item.Contains("transitions"));
             var endIndex = loadedFileList.FindIndex(item => item.Contains("end"));
 
+            transitions.Clear();
+
             var _transitions = new List<string>();
 
             for (int i = startIndex + 1; i < loadedFileList.Count; i++)
@@ -120,6 +132,66 @@ namespace Automata
             
 
         }
+
+        public bool isDFA()
+        {
+            string result = loadedFileList.Find(item => item.Contains("dfa"));
+
+            // check if dfa is set or not
+            if (result == null)
+            {
+                return false;
+            }
+            else
+            {
+                result = result.Split(':').Last();
+                result = result.Trim();
+
+                if (result != "y")
+                {
+                    return false;
+                }
+                return true;
+            }
+
+        }
+
+        public bool isFinite()
+        {
+            string result = loadedFileList.Find(item => item.Contains("finite"));
+            
+            // check if dfa is set or not
+            if (result == null)
+            {
+                return false;
+            }
+            else
+            {
+                result = result.Split(':').Last();
+                result = result.Trim();
+
+                if (result != "y")
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool isWords()
+        {
+            string result = loadedFileList.Find(item => item.Contains("words"));
+            // check if dfa is set or not
+            if (result == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         public void GenerateDot()
         {

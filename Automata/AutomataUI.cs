@@ -40,6 +40,7 @@ namespace Automata
             if (tbBrowse.Text != "")
             {
                 am.readNDFA(tbBrowse.Text);
+                updateForm();
             } else
             {
                 MessageBox.Show("File is not selected!");
@@ -51,6 +52,36 @@ namespace Automata
             string imagePath = AppDomain.CurrentDomain.BaseDirectory + "\\abc.png";
             pbDiagram.ImageLocation = imagePath;
             
+        }
+
+        private void updateForm()
+        {
+            if (am.isDFA())
+            {
+                lbDFA.BackColor = Color.LightGreen;
+            } else
+            {
+                lbDFA.BackColor = Color.Red;
+
+            }
+
+            if (am.isFinite())
+            {
+                lbFinite.BackColor = Color.LightGreen;
+            } else
+            {
+                lbFinite.BackColor = Color.Red;
+
+            }
+
+            if (am.isWords())
+            {
+                lbWords.BackColor = Color.LightGreen;
+            } else
+            {
+                lbWords.BackColor = Color.Red;
+
+            }
         }
     }
 }

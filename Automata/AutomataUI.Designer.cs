@@ -35,6 +35,9 @@
             this.btnRead = new System.Windows.Forms.Button();
             this.pbDiagram = new System.Windows.Forms.PictureBox();
             this.btnShow = new System.Windows.Forms.Button();
+            this.lbFinite = new System.Windows.Forms.Label();
+            this.lbWords = new System.Windows.Forms.Label();
+            this.lbDFA = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbDiagram)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,14 +49,14 @@
             // 
             this.tbBrowse.Location = new System.Drawing.Point(15, 33);
             this.tbBrowse.Name = "tbBrowse";
-            this.tbBrowse.Size = new System.Drawing.Size(194, 20);
+            this.tbBrowse.Size = new System.Drawing.Size(253, 20);
             this.tbBrowse.TabIndex = 0;
             this.tbBrowse.Tag = "";
             this.tbBrowse.Text = "finite.txt";
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(215, 30);
+            this.btnBrowse.Location = new System.Drawing.Point(274, 30);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(74, 25);
             this.btnBrowse.TabIndex = 1;
@@ -72,9 +75,9 @@
             // 
             // btnRead
             // 
-            this.btnRead.Location = new System.Drawing.Point(12, 59);
+            this.btnRead.Location = new System.Drawing.Point(15, 59);
             this.btnRead.Name = "btnRead";
-            this.btnRead.Size = new System.Drawing.Size(75, 46);
+            this.btnRead.Size = new System.Drawing.Size(91, 50);
             this.btnRead.TabIndex = 3;
             this.btnRead.Text = "read NDFA";
             this.btnRead.UseVisualStyleBackColor = true;
@@ -82,7 +85,7 @@
             // 
             // pbDiagram
             // 
-            this.pbDiagram.Location = new System.Drawing.Point(12, 224);
+            this.pbDiagram.Location = new System.Drawing.Point(12, 167);
             this.pbDiagram.Name = "pbDiagram";
             this.pbDiagram.Size = new System.Drawing.Size(647, 273);
             this.pbDiagram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -91,19 +94,52 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(15, 111);
+            this.btnShow.Location = new System.Drawing.Point(12, 115);
             this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(274, 46);
+            this.btnShow.Size = new System.Drawing.Size(337, 46);
             this.btnShow.TabIndex = 5;
             this.btnShow.Text = "Show Diagram";
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
+            // lbFinite
+            // 
+            this.lbFinite.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.lbFinite.Location = new System.Drawing.Point(112, 59);
+            this.lbFinite.Name = "lbFinite";
+            this.lbFinite.Size = new System.Drawing.Size(75, 50);
+            this.lbFinite.TabIndex = 6;
+            this.lbFinite.Text = "Finite";
+            this.lbFinite.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbWords
+            // 
+            this.lbWords.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.lbWords.Location = new System.Drawing.Point(274, 59);
+            this.lbWords.Name = "lbWords";
+            this.lbWords.Size = new System.Drawing.Size(75, 50);
+            this.lbWords.TabIndex = 7;
+            this.lbWords.Text = "Words";
+            this.lbWords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbDFA
+            // 
+            this.lbDFA.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.lbDFA.Location = new System.Drawing.Point(193, 59);
+            this.lbDFA.Name = "lbDFA";
+            this.lbDFA.Size = new System.Drawing.Size(75, 50);
+            this.lbDFA.TabIndex = 8;
+            this.lbDFA.Text = "DFA";
+            this.lbDFA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // AutomataUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(671, 509);
+            this.ClientSize = new System.Drawing.Size(671, 445);
+            this.Controls.Add(this.lbDFA);
+            this.Controls.Add(this.lbWords);
+            this.Controls.Add(this.lbFinite);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.pbDiagram);
             this.Controls.Add(this.btnRead);
@@ -127,6 +163,9 @@
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.PictureBox pbDiagram;
         private System.Windows.Forms.Button btnShow;
+        private System.Windows.Forms.Label lbFinite;
+        private System.Windows.Forms.Label lbWords;
+        private System.Windows.Forms.Label lbDFA;
     }
 }
 
