@@ -82,15 +82,16 @@
             // 
             // pbDiagram
             // 
-            this.pbDiagram.Location = new System.Drawing.Point(353, 12);
+            this.pbDiagram.Location = new System.Drawing.Point(12, 224);
             this.pbDiagram.Name = "pbDiagram";
-            this.pbDiagram.Size = new System.Drawing.Size(603, 465);
+            this.pbDiagram.Size = new System.Drawing.Size(647, 273);
+            this.pbDiagram.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbDiagram.TabIndex = 4;
             this.pbDiagram.TabStop = false;
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(15, 410);
+            this.btnShow.Location = new System.Drawing.Point(15, 111);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(274, 46);
             this.btnShow.TabIndex = 5;
@@ -102,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(968, 509);
+            this.ClientSize = new System.Drawing.Size(671, 509);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.pbDiagram);
             this.Controls.Add(this.btnRead);

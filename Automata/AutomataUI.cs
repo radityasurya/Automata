@@ -49,13 +49,8 @@ namespace Automata
         private void btnShow_Click(object sender, EventArgs e)
         {
             string imagePath = AppDomain.CurrentDomain.BaseDirectory + "\\abc.png";
-
-            using (Process image = new Process())
-            {
-                image.StartInfo.FileName = imagePath;
-
-                image.Start();
-            }
+            pbDiagram.ImageLocation = imagePath;
+            
         }
     }
 }
