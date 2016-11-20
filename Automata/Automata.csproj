@@ -54,7 +54,6 @@
     <Compile Include="AutomataUI.Designer.cs">
       <DependentUpon>AutomataUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Automaton.cs" />
     <Compile Include="DFA.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="Program.cs" />

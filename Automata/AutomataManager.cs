@@ -154,27 +154,24 @@ namespace Automata
         public bool isDFA()
         {
             string result = loadedFileList.Find(item => item.Contains("dfa"));
-
+            dfa = new DFA(Alphabets.Characters, Transitions, States);
             // check if dfa is set or not
             if (result == null)
             {
-                return false;
+                fh.UpdateFile("write", dfa.isDFA());
             }
             else
             {
                 result = result.Split(':').Last();
                 result = result.Trim();
 
-                //if (result != "y")
-                //{
-                //    return false;
-                //}
-                //return true;
-                dfa = new DFA(Alphabets.Characters, Transitions, States);
-
-                return dfa.isDFA();
                 
+
+                fh.UpdateFile("update", dfa.isDFA());               
             }
+
+            return dfa.isDFA();
+
 
         }
 

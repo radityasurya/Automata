@@ -107,6 +107,11 @@ namespace Automata
             // loop to get next state
             foreach (char c in input)
             {
+                if (current == null)
+                {
+                    return false;
+                }
+
                 if (!Alphabets.Contains(c))
                 {
                     throw new ArgumentException("Character is not in alphabet list!");
@@ -115,6 +120,8 @@ namespace Automata
                     current = Table.GetNextStates(current, c);
                 }
             }
+
+            
 
             // check if the current state is final
             return isFinalState(current);

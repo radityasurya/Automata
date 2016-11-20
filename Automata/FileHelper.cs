@@ -10,13 +10,15 @@ namespace Automata
 {
     public class FileHelper
     {
-            
+        public List<string> lines { get; set; } 
+        public string filepath { get; set; }
         public FileHelper()
         {
         }
 
         public List<string> Load(string filePath)
         {
+            this.filepath = filePath;
             List<string> result = new List<string>();
             try
             {
@@ -37,6 +39,8 @@ namespace Automata
                         }
                     }
                 }
+
+                lines = result;
             }
             catch (Exception e)
             {
@@ -62,6 +66,52 @@ namespace Automata
             dot.WaitForExit();
         }
 
+        public void UpdateFile(string type, bool isDFA)
+        {
+            if (type == "write")
+            {
+                using (TextWriter tw = new StreamWriter(filepath))
+                {
+                    foreach (String s in lines)
+                    {
+                        tw.WriteLine(s);
+                    }
+
+                    if (isDFA)
+                    {
+                        tw.WriteLine("dfa: y");
+                    }
+                    else
+                    {
+                        tw.WriteLine("dfa: n");
+                    }
+                }
+            } else
+            {
+                using (TextWriter tw = new StreamWriter(filepath))
+                {
+                    foreach (string s in lines)
+                    {
+                        if (s.Contains("dfa"))
+                        {
+                            if (isDFA)
+                            {
+                                tw.WriteLine("dfa: y");
+                            }
+                            else
+                            {
+                                tw.WriteLine("dfa: n");
+                            }
+                        } else
+                        {
+                            tw.WriteLine(s);
+                        }
+                    }
+                }
+            }
+            
+                
+        }
         
     }
 }

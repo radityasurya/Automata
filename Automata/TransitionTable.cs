@@ -48,7 +48,12 @@ namespace Automata
             {
                 if (k.Key.Name == s.Name && k.Key.isFinal == s.isFinal)
                 {
-                    key = k;
+                    char _token = k.Value;
+                    if (_token == c)
+                    {
+                        key = k;
+                        break;
+                    }
                 }
             }
 
