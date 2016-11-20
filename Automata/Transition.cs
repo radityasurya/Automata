@@ -8,11 +8,11 @@ namespace Automata
 {
     public class Transition
     {
-        public char CurrentState { get; set; }
+        public State CurrentState { get; set; }
         public char Token { get; set; }
-        public char NextState { get; set; }
+        public State NextState { get; set; }
 
-        public Transition(char currentState, char token, char nextState)
+        public Transition(State currentState, char token, State nextState)
         {
             this.CurrentState = currentState;
 
@@ -23,12 +23,13 @@ namespace Automata
             {
                 this.Token = token;
             }
+
             this.NextState = nextState;    
         }
 
         public override string ToString()
         {
-            return string.Format("\"{0}\" -> " + "\"{1}\" [label=" + "\"{2}\"]", CurrentState, NextState, Token);
+            return string.Format("\"{0}\" -> " + "\"{1}\" [label=" + "\"{2}\"]", CurrentState.Name, NextState.Name, Token);
         }
     }
 }

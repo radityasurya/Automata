@@ -17,9 +17,9 @@ namespace Automata
 
         // Variables
         private List<string> loadedFileList = new List<string>();
-        private Alphabet alphabet;
-        private List<State> states = new List<State>();
-        private List<Transition> transitions = new List<Transition>();
+        private Alphabet Alphabets;
+        private List<State> States = new List<State>();
+        private List<Transition> Transitions = new List<Transition>();
 
         public AutomataManager()
         {
@@ -32,13 +32,12 @@ namespace Automata
 
             getAlphabets();
             getStates();
-            getFinalState();
             getTransition();
 
             GenerateDot();
             fh.buildGraph();
 
-            states.Count();
+            States.Count();
         }
 
         public void getAlphabets()
@@ -54,7 +53,7 @@ namespace Automata
                 alphabets.Add(Convert.ToChar(c));
             }
 
-            alphabet = new Alphabet(alphabets.ToArray());
+            Alphabets = new Alphabet(alphabets.ToArray());
 
         }
 
@@ -68,7 +67,7 @@ namespace Automata
 
             foreach (var s in _state)
             {
-                states.Add(new State(Convert.ToChar(s)));
+                States.Add(new State(Convert.ToChar(s)));
             }
         }
 
@@ -91,7 +90,7 @@ namespace Automata
             foreach (var _s in _state)
             {
 
-                foreach (var s in states)
+                foreach (var s in States)
                 {
                     if (s.Name.Equals(Convert.ToChar(_s)))
                     {
@@ -103,10 +102,12 @@ namespace Automata
 
         public void getTransition()
         {
+            getFinalState();
+
             var startIndex = loadedFileList.FindIndex(item => item.Contains("transitions"));
             var endIndex = loadedFileList.FindIndex(item => item.Contains("end"));
 
-            transitions.Clear();
+            Transitions.Clear();
 
             var _transitions = new List<string>();
 
@@ -126,14 +127,28 @@ namespace Automata
                 string[] separators = { ",", "-->" };
                 string[] result = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-                var startState = Convert.ToChar(result[0]);
+                var startState = getState(Convert.ToChar(result[0]));
                 var token = Convert.ToChar(result[1].Trim());
-                var endState = Convert.ToChar(result[2].Trim());
+                var endState = getState(Convert.ToChar(result[2].Trim()));
 
-                transitions.Add(new Transition(startState, token, endState));
+                Transitions.Add(new Transition(startState, token, endState));
             }
-            
 
+        }
+
+        public State getState(char c)
+        {
+            State result = null;
+
+            foreach (var s in States)
+            {
+                if (s.Name == c)
+                {
+                    result = s;
+                }
+            }
+
+            return result;
         }
 
         public bool isDFA()
@@ -155,7 +170,7 @@ namespace Automata
                 //    return false;
                 //}
                 //return true;
-                dfa = new DFA(alphabet.Characters, transitions, states);
+                dfa = new DFA(Alphabets.Characters, Transitions, States);
 
                 return dfa.isDFA();
                 
@@ -199,6 +214,56 @@ namespace Automata
             }
         }
 
+        public bool isInAlphabets(char c)
+        {
+            foreach (var _c in Alphabets.Characters)
+            {
+                if (_c == c)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool checkString(string input)
+        {
+            return dfa.hasCorrectInput(input);
+        }
+
+        public void GenerateAutomaton(Alphabet a)
+        {
+            var characters = new List<char>(a.Characters);
+            foreach (Char c in a.Characters)
+            {
+                if (c != 'ε')
+                {
+                    characters.Add(c);
+                }
+            }
+
+            var alphabet = characters.ToArray();
+
+            var transitions = new List<Transition>(Transitions.Count);
+            foreach (var transition in Transitions)
+            {
+                transitions.Add(new Transition(transition.CurrentState, transition.Token, transition.NextState));
+            }
+
+            List<State> finalStates = new List<State>();
+
+            foreach (var state in States)
+            {
+                if(state.isFinal)
+                {
+                    finalStates.Add(state);
+                }
+            }
+
+            dfa = new DFA(Alphabets.Characters, Transitions, States);
+        }
 
         public void GenerateDot()
         {
@@ -210,7 +275,7 @@ namespace Automata
             lines.Add(string.Format("\"\" [shape=none]"));
 
             // draw states
-            foreach (var s in states)
+            foreach (var s in States)
             {
                 string circle = "circle";
                 if(s.isFinal)
@@ -221,10 +286,10 @@ namespace Automata
                 lines.Add(string.Format("\"{0}\" [shape={1}]", s.Name, circle));
             }
 
-            lines.Add(string.Format("\"\" -> " + "\"{0}\"", transitions[0].CurrentState));
+            lines.Add(string.Format("\"\" -> " + "\"{0}\"", Transitions[0].CurrentState.Name));
 
             // draw transitions
-            foreach (var t in transitions)
+            foreach (var t in Transitions)
             {
                 lines.Add(t.ToString());
             }

@@ -41,6 +41,7 @@ namespace Automata
             {
                 am.readNDFA(tbBrowse.Text);
                 updateForm();
+                btnShow_Click(sender, e);
             } else
             {
                 MessageBox.Show("File is not selected!");
@@ -81,6 +82,27 @@ namespace Automata
             {
                 lbWords.BackColor = Color.Red;
 
+            }
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            string input = tbCheck.Text;
+            if (input == "")
+            {
+                MessageBox.Show("Please enter text!");
+                return;
+            } else
+            {
+                bool isAccepted = am.checkString(input);
+
+                if (isAccepted)
+                {
+                    tbCheck.BackColor = Color.LightGreen;
+                } else
+                {
+                    tbCheck.BackColor = Color.Red;
+                }
             }
         }
     }

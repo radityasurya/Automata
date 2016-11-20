@@ -11,15 +11,33 @@ namespace Automata
 
         public char[] Alphabets { get; set; }
         public List<State> States { get; set; }
+        public List<State> FinalStates { get; set; }
+        public State InitialState { get; set; }
         public List<Transition> Transitions { get; set; }
 
         public State CurrentState { get; set; }
+
+        public TransitionTable Table { get; set; }
 
         public DFA(char[] alphabets, List<Transition> transition, List<State> states)
         {
             this.Alphabets = alphabets;
             this.States = states;
             this.Transitions = transition;
+            Table = new TransitionTable();
+
+            this.InitialState = states[0];
+            this.FinalStates = new List<State>();
+            foreach (var s in States)
+            {
+                if (s.isFinal)
+                    FinalStates.Add(s);
+            }
+            foreach (var t in Transitions)
+            {
+                Table.AddTransition(t.CurrentState, t.Token, t.NextState);
+            }
+            
         }
 
         public bool isDFA()
@@ -61,7 +79,7 @@ namespace Automata
             {
                 foreach (var s in States)
                 {
-                    if (t.CurrentState == s.Name)
+                    if (t.CurrentState.Name == s.Name)
                     {
                         foreach (var a in Alphabets)
                         {
@@ -79,6 +97,32 @@ namespace Automata
                 return false;
             }
             return true;
+        }
+
+        public bool hasCorrectInput(string input)
+        {
+            // get initial state
+            var current = InitialState;
+
+            // loop to get next state
+            foreach (char c in input)
+            {
+                if (!Alphabets.Contains(c))
+                {
+                    throw new ArgumentException("Character is not in alphabet list!");
+                } else
+                {
+                    current = Table.GetNextStates(current, c);
+                }
+            }
+
+            // check if the current state is final
+            return isFinalState(current);
+        }
+
+        public bool isFinalState(State state)
+        {
+            return (FinalStates.Contains(state));
         }
 
     }

@@ -8,12 +8,12 @@ namespace Automata
 {
     public class TransitionTable
     {
-        private Dictionary<Tuple<State, char>, List<State>> transitions;
+        private Dictionary<KeyValuePair<State, char>, State> transitions;
         public bool Finished { get; set; }
 
         public TransitionTable()
         {
-            this.transitions = new Dictionary<Tuple<State, char>, List<State>>();
+            this.transitions = new Dictionary<KeyValuePair<State, char>, State>();
             this.Finished = false;
         }
 
@@ -24,27 +24,41 @@ namespace Automata
                 
             } else
             {
-                List<State> nextStates;
+                State nextStates;
 
-                var key = new Tuple<State, char>(current, token);
+                var key = new KeyValuePair<State, char>(current, token);
 
                 bool isTransitionExist = transitions.TryGetValue(key, out nextStates);
 
                 if (!isTransitionExist)
                 {
-                    nextStates = new List<State>();
-                    transitions.Add(key, nextStates);
+                    transitions.Add(key, next);
                 }
 
-                bool isDuplicated = nextStates.Contains(next);
-                if (isDuplicated)
-                {
-
-                } else
-                {
-                    nextStates.Add(next);
-                }
             }
         }
+
+        public State GetNextStates(State s, char c)
+        {
+            State nextState;
+
+            KeyValuePair<State, char> key = new KeyValuePair<State, char>();
+
+            foreach (var k in transitions.Keys)
+            {
+                if (k.Key.Name == s.Name && k.Key.isFinal == s.isFinal)
+                {
+                    key = k;
+                }
+            }
+
+            bool transitionIsDefined = transitions.TryGetValue(key, out nextState);
+
+
+            return nextState;
+
+        }
+
+
     }
 }
