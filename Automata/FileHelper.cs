@@ -66,52 +66,31 @@ namespace Automata
             dot.WaitForExit();
         }
 
-        public void UpdateFile(string type, bool isDFA)
+        public void UpdateFile(bool isDFA)
         {
-            if (type == "write")
+            filepath = "updated_" + filepath;
+            using (TextWriter tw = new StreamWriter(filepath))
             {
-                using (TextWriter tw = new StreamWriter(filepath))
+                foreach (string s in lines)
                 {
-                    foreach (String s in lines)
+                    if (s.Contains("dfa"))
                     {
-                        tw.WriteLine(s);
-                    }
-
-                    if (isDFA)
-                    {
-                        tw.WriteLine("dfa: y");
+                        if (isDFA)
+                        {
+                            tw.WriteLine("dfa: y");
+                        }
+                        else
+                        {
+                            tw.WriteLine("dfa: n");
+                        }
                     }
                     else
                     {
-                        tw.WriteLine("dfa: n");
-                    }
-                }
-            } else
-            {
-                using (TextWriter tw = new StreamWriter(filepath))
-                {
-                    foreach (string s in lines)
-                    {
-                        if (s.Contains("dfa"))
-                        {
-                            if (isDFA)
-                            {
-                                tw.WriteLine("dfa: y");
-                            }
-                            else
-                            {
-                                tw.WriteLine("dfa: n");
-                            }
-                        } else
-                        {
-                            tw.WriteLine(s);
-                        }
+                        tw.WriteLine(s);
                     }
                 }
             }
-            
-                
+
         }
-        
     }
 }

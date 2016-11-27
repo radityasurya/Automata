@@ -158,7 +158,7 @@ namespace Automata
             // check if dfa is set or not
             if (result == null)
             {
-                fh.UpdateFile("write", dfa.isDFA());
+                fh.UpdateFile(dfa.isDFA());
             }
             else
             {
@@ -167,7 +167,7 @@ namespace Automata
 
                 
 
-                fh.UpdateFile("update", dfa.isDFA());               
+                fh.UpdateFile(dfa.isDFA());               
             }
 
             return dfa.isDFA();
