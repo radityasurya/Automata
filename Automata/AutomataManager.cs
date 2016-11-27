@@ -227,7 +227,11 @@ namespace Automata
 
         public bool checkString(string input)
         {
-            return dfa.hasCorrectInput(input);
+            if (input == " ") {
+                return false;
+            } else {
+                return dfa.hasCorrectInput(input);
+            }
         }
 
         public void GenerateAutomaton(Alphabet a)

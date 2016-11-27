@@ -121,8 +121,6 @@ namespace Automata
                 }
             }
 
-            
-
             // check if the current state is final
             return isFinalState(current);
         }

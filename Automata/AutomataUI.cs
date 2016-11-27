@@ -94,15 +94,24 @@ namespace Automata
                 return;
             } else
             {
-                bool isAccepted = am.checkString(input);
+                try
+                {
+                    bool isAccepted = am.checkString(input);
 
-                if (isAccepted)
-                {
-                    tbCheck.BackColor = Color.LightGreen;
-                } else
-                {
-                    tbCheck.BackColor = Color.Red;
+                    if (isAccepted)
+                    {
+                        tbCheck.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        tbCheck.BackColor = Color.Red;
+                    }
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error!");
+                }
+                
             }
         }
     }
